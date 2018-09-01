@@ -59,17 +59,23 @@ function* powersGenerator(base, limit) {
 
 // TODO: Probelm 6
 
-function interleave(arrayA, ...arrayB) {
-  const interleavedArray = [];
-  while (arrayA.length > 0 || arrayB.length > 0) {
-    if (arrayA.length > 0) {
-      interleavedArray.push(arrayA.shift());
-    }
-    if (arrayB.length > 0) {
-      interleavedArray.push(arrayB.shift());
-    }
-  }
-  return interleavedArray;
+// function interleave(arrayA, ...arrayB) {
+//   const interleavedArray = [];
+//   while (arrayA.length > 0 || arrayB.length > 0) {
+//     if (arrayA.length > 0) {
+//       interleavedArray.push(arrayA.shift());
+//     }
+//     if (arrayB.length > 0) {
+//       interleavedArray.push(arrayB.shift());
+//     }
+//   }
+//   return interleavedArray;
+// }
+
+// What the actual fuck is this o.O//
+function interleave(arr1, ...arr2) {
+  let result = arr1.map((v,i) => [v, arr2[i]]).reduce((a,b) => a.concat(b)).filter(n => n);
+  return arr1.length < arr2.length ? result.concat(arr2.slice(arr1.length)) : result;
 }
 
 function cylinder(spec) {
