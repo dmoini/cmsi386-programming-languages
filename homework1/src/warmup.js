@@ -57,6 +57,8 @@ function* powersGenerator(base, limit) {
   }
 }
 
+// TODO: Probelm 6
+
 function interleave(arrayA, ...arrayB) {
   const interleavedArray = [];
   while (arrayA.length > 0 || arrayB.length > 0) {
@@ -70,12 +72,23 @@ function interleave(arrayA, ...arrayB) {
   return interleavedArray;
 }
 
-
-// TODO: Problem 7
-
-
-// TODO: Problem 8
-
+function cylinder(spec) {
+  let { radius = 1, height = 1 } = spec;
+  const volume = () => (Math.PI * (radius ** 2) * height);
+  const surfaceArea = () => (2 * Math.PI * radius * height) + (2 * Math.PI * (radius ** 2));
+  const widen = (factor) => { radius *= factor; };
+  const stretch = (factor) => { height *= factor; };
+  const toString = () => `Cylinder with radius ${radius} and height ${height}`;
+  return Object.freeze({
+    get radius() { return radius; },
+    get height() { return height; },
+    volume,
+    surfaceArea,
+    widen,
+    stretch,
+    toString,
+  });
+}
 
 // TODO: Problem 9
 
@@ -90,7 +103,7 @@ module.exports = {
   powersGenerator,
   // say,
   interleave,
-  // cylinder,
+  cylinder,
   // makeCryptoFunctions,
   // randomName,
 };
