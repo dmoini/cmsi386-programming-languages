@@ -11,20 +11,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dmoini/lmu-cmsi-386.git"
+    "url": "git+https://github.com/dmoini/cmsi386-programming-languages.git"
   },
   "author": "Donovan Moini & Ian Lizarda",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dmoini/lmu-cmsi-386/issues"
+    "url": "https://github.com/dmoini/cmsi386-programming-languages/issues"
   },
-  "homepage": "https://github.com/dmoini/lmu-cmsi-386#readme",
+  "homepage": "https://github.com/dmoini/cmsi386-programming-languages#readme",
   "dependencies": {
     "request": "^2.88.0",
     "request-promise": "^4.2.2"
   },
   "devDependencies": {
-    "eslint": "^5.4.0",
+    "eslint": "^5.5.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
     "mocha": "^5.2.0",
