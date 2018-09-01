@@ -57,7 +57,18 @@ function* powersGenerator(base, limit) {
   }
 }
 
-// TODO: Problem 6
+function interleave(arrayA, ...arrayB) {
+  const interleavedArray = [];
+  while (arrayA.length > 0 || arrayB.length > 0) {
+    if (arrayA.length > 0) {
+      interleavedArray.push(arrayA.shift());
+    }
+    if (arrayB.length > 0) {
+      interleavedArray.push(arrayB.shift());
+    }
+  }
+  return interleavedArray;
+}
 
 
 // TODO: Problem 7
@@ -78,8 +89,8 @@ module.exports = {
   powers,
   powersGenerator,
   // say,
-  // interleave,
+  interleave,
   // cylinder,
   // makeCryptoFunctions,
-  // randomName
+  // randomName,
 };
