@@ -1,4 +1,3 @@
-// Problem 1
 function change(cents) {
   if (cents < 0) {
     throw new RangeError('amount cannot be negative');
@@ -58,7 +57,17 @@ function* powersGenerator(base, limit) {
   }
 }
 
-// TODO: Probelm 6
+function say(message) {
+  const output = [];
+  function addMessages(newMessage) {
+    if (!newMessage) {
+      return output.join(' ');
+    }
+    output.push(newMessage);
+    return addMessages;
+  }
+  return addMessages(message);
+}
 
 
 // function interleave(arrayA, ...arrayB) {
@@ -74,8 +83,10 @@ function* powersGenerator(base, limit) {
 //   return interleavedArray;
 // }
 
-// What the actual fuck is this o.O//
 function interleave(arr1, ...arr2) {
+  if (arr1.length === 0) {
+    return arr2;
+  }
   const result = arr1.map((v, i) => [v, arr2[i]]).reduce((a, b) => a.concat(b)).filter(n => n);
   return arr1.length < arr2.length ? result.concat(arr2.slice(arr1.length)) : result;
 }
@@ -109,7 +120,7 @@ module.exports = {
   scramble,
   powers,
   powersGenerator,
-  // say,
+  say,
   interleave,
   cylinder,
   // makeCryptoFunctions,
