@@ -26,16 +26,17 @@ function stripQuotes(s) {
 function scramble(s) {
   const array = s.split('');
   let currentIndex = array.length;
-  let temporaryValue;
+  // let temporaryValue;
   let randomIndex;
 
   while (currentIndex !== 0) {
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
 
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
+    [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+    // temporaryValue = array[currentIndex];
+    // array[currentIndex] = array[randomIndex];
+    // array[randomIndex] = temporaryValue;
   }
   return array.join('');
 }
@@ -59,6 +60,7 @@ function* powersGenerator(base, limit) {
 
 // TODO: Probelm 6
 
+
 // function interleave(arrayA, ...arrayB) {
 //   const interleavedArray = [];
 //   while (arrayA.length > 0 || arrayB.length > 0) {
@@ -74,7 +76,7 @@ function* powersGenerator(base, limit) {
 
 // What the actual fuck is this o.O//
 function interleave(arr1, ...arr2) {
-  let result = arr1.map((v,i) => [v, arr2[i]]).reduce((a,b) => a.concat(b)).filter(n => n);
+  const result = arr1.map((v, i) => [v, arr2[i]]).reduce((a, b) => a.concat(b)).filter(n => n);
   return arr1.length < arr2.length ? result.concat(arr2.slice(arr1.length)) : result;
 }
 
