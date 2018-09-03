@@ -57,6 +57,10 @@ function* powersGenerator(base, limit) {
   }
 }
 
+function say2(message) {
+  return message ? msg => (msg ? message + msg : message) : message;
+}
+
 function say(message) {
   const output = [];
   const addMessages = (newMessage) => {
@@ -84,9 +88,7 @@ function say(message) {
 // }
 
 function interleave(arr1, ...arr2) {
-  if (arr1.length === 0) {
-    return arr2;
-  }
+  if (arr1.length === 0) { return arr2; }
   const result = arr1.map((v, i) => [v, arr2[i]]).reduce((a, b) => a.concat(b)).filter(n => n);
   return arr1.length < arr2.length ? result.concat(arr2.slice(arr1.length)) : result;
 }
@@ -109,7 +111,7 @@ function cylinder(spec) {
   });
 }
 
-// Got help from https://www.w3schools.com/nodejs/ref_crypto.asp
+// https://www.w3schools.com/nodejs/ref_crypto.asp
 const crypto = require('crypto');
 
 function makeCryptoFunctions(cryptoKey, cryptoAlgorithm) {
@@ -130,8 +132,23 @@ function makeCryptoFunctions(cryptoKey, cryptoAlgorithm) {
 }
 
 // TODO: Problem 10
-function randomName(gender, region) {
-  return gender + region;
+const rp = require('request-promise');
+
+function randomName(info) {
+  const { gender, region } = info;
+  const options = {
+    method: 'GET',
+    uri: 'https://uinames.com/api/?amount=1',
+    qs: {
+      gender,
+      region,
+    },
+    headers: {
+      'User-Agent': 'Request-Promise',
+    },
+    json: true, // Automatically stringifies the body to JSON
+  };
+  return rp(options).then(data => `${data.surname}, ${data.name}`);
 }
 
 module.exports = {
