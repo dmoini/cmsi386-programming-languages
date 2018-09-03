@@ -59,13 +59,13 @@ function* powersGenerator(base, limit) {
 
 function say(message) {
   const output = [];
-  function addMessages(newMessage) {
+  const addMessages = (newMessage) => {
     if (!newMessage) {
       return output.join(' ');
     }
     output.push(newMessage);
     return addMessages;
-  }
+  };
   return addMessages(message);
 }
 
