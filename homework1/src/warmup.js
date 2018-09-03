@@ -109,10 +109,30 @@ function cylinder(spec) {
   });
 }
 
-// TODO: Problem 9
+// Got help from https://www.w3schools.com/nodejs/ref_crypto.asp
+const crypto = require('crypto');
 
+function makeCryptoFunctions(cryptoKey, cryptoAlgorithm) {
+  function encrypt(s) {
+    const cipher = crypto.createCipher(cryptoAlgorithm, cryptoKey);
+    let encryption = cipher.update(s, 'utf8', 'hex');
+    encryption += cipher.final('hex');
+    return encryption;
+  }
+
+  function decrypt(s) {
+    const decipher = crypto.createDecipher(cryptoAlgorithm, cryptoKey);
+    let decryption = decipher.update(s, 'hex', 'utf8');
+    decryption += decipher.final('utf8');
+    return decryption;
+  }
+  return [encrypt, decrypt];
+}
 
 // TODO: Problem 10
+function randomName(gender, region) {
+  return gender + region;
+}
 
 module.exports = {
   change,
@@ -123,6 +143,6 @@ module.exports = {
   say,
   interleave,
   cylinder,
-  // makeCryptoFunctions,
-  // randomName,
+  makeCryptoFunctions,
+  randomName,
 };
