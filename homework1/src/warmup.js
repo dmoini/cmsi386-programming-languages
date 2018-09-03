@@ -60,9 +60,15 @@ function* powersGenerator(base, limit) {
   }
 }
 
+<<<<<<< HEAD
 // function say2(message) {
 //   return message ? msg => (msg ? message + msg : message) : message;
 // }
+=======
+function say2(message) {
+  return message ? msg => (msg ? message + msg : message) : message;
+}
+>>>>>>> 32bc18c9c7fde3bde8bbc867b3ec1a49b052923d
 
 function say(message) {
   const output = [];
@@ -115,6 +121,11 @@ function cylinder(spec) {
 }
 
 // https://www.w3schools.com/nodejs/ref_crypto.asp
+<<<<<<< HEAD
+=======
+const crypto = require('crypto');
+
+>>>>>>> 32bc18c9c7fde3bde8bbc867b3ec1a49b052923d
 function makeCryptoFunctions(cryptoKey, cryptoAlgorithm) {
   function encrypt(s) {
     const cipher = crypto.createCipher(cryptoAlgorithm, cryptoKey);
@@ -132,6 +143,11 @@ function makeCryptoFunctions(cryptoKey, cryptoAlgorithm) {
   return [encrypt, decrypt];
 }
 
+<<<<<<< HEAD
+=======
+// TODO: Problem 10
+const rp = require('request-promise');
+>>>>>>> 32bc18c9c7fde3bde8bbc867b3ec1a49b052923d
 
 function randomName(info) {
   const { gender, region } = info;
