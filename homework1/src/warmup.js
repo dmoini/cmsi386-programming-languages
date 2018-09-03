@@ -76,24 +76,30 @@ function say(message) {
   return addMessages(message);
 }
 
-
-// function interleave(arrayA, ...arrayB) {
-//   const interleavedArray = [];
-//   while (arrayA.length > 0 || arrayB.length > 0) {
-//     if (arrayA.length > 0) {
-//       interleavedArray.push(arrayA.shift());
-//     }
-//     if (arrayB.length > 0) {
-//       interleavedArray.push(arrayB.shift());
-//     }
+// function interleaveToal(a, ...b) {
+//   const aLength = a.length;
+//   const bLength = b.length;
+//   const max = Math.max(aLength, bLength);
+//   const result = [];
+//   for (let i = 0; i < max; i += 1) {
+//     if (i < aLength) { result.push(a[i]); }
+//     if (i < bLength) { result.push(b[i]); }
 //   }
-//   return interleavedArray;
+//   return result;
 // }
 
-function interleave(arr1, ...arr2) {
-  if (arr1.length === 0) { return arr2; }
-  const result = arr1.map((v, i) => [v, arr2[i]]).reduce((a, b) => a.concat(b)).filter(n => n);
-  return arr1.length < arr2.length ? result.concat(arr2.slice(arr1.length)) : result;
+// function interleaveIan(arr1, ...arr2) {
+//   if (arr1.length === 0) { return arr2; }
+//   const result = arr1.map((v, i) => [v, arr2[i]]).reduce((a, b) => a.concat(b)).filter(n => n);
+//   return arr1.length < arr2.length ? result.concat(arr2.slice(arr1.length)) : result;
+// }
+
+function interleave(a, ...b) {
+  const [aLen, bLen, minLength] = [a.length, b.length, Math.min(a.length, b.length)];
+  const interleaved = a.slice(0, minLength)
+    .map((v, i) => [v, b[i]])
+    .reduce((x, y) => [...x, ...y], []);
+  return [...interleaved, ...(aLen < bLen ? b : a).slice(minLength)];
 }
 
 function cylinder(spec) {
