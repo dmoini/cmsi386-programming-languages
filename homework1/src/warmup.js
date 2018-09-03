@@ -2,22 +2,19 @@ const crypto = require('crypto');
 const rp = require('request-promise');
 
 function change(cents) {
-  if (cents < 0) {
-    throw new RangeError('amount cannot be negative');
-  }
+  if (cents < 0) { throw new RangeError('amount cannot be negative'); }
   const denominations = [25, 10, 5, 1];
-  const results = [];
-  results.length = 3;
+  const numberOfCoins = [];
   let remainingChange = cents;
   denominations.forEach((denomination, index) => {
     if (index < denominations.length - 1) {
-      results[index] = Math.floor(remainingChange / denomination);
+      numberOfCoins[index] = Math.floor(remainingChange / denomination);
       remainingChange %= denomination;
     } else {
-      results[index] = remainingChange;
+      numberOfCoins[index] = remainingChange;
     }
   });
-  return results;
+  return numberOfCoins;
 }
 
 function stripQuotes(s) {
@@ -26,21 +23,16 @@ function stripQuotes(s) {
 }
 
 function scramble(s) {
-  const array = s.split('');
-  let currentIndex = array.length;
-  // let temporaryValue;
+  const sArray = s.split('');
+  let currentIndex = sArray.length;
   let randomIndex;
 
   while (currentIndex !== 0) {
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
-
-    [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
-    // temporaryValue = array[currentIndex];
-    // array[currentIndex] = array[randomIndex];
-    // array[randomIndex] = temporaryValue;
+    [sArray[currentIndex], sArray[randomIndex]] = [sArray[randomIndex], sArray[currentIndex]];
   }
-  return array.join('');
+  return sArray.join('');
 }
 
 function powers(base, limit, callback) {
@@ -95,11 +87,11 @@ function say(message) {
 // }
 
 function interleave(a, ...b) {
-  const [aLen, bLen, minLength] = [a.length, b.length, Math.min(a.length, b.length)];
+  const [aLength, bLength, minLength] = [a.length, b.length, Math.min(a.length, b.length)];
   const interleaved = a.slice(0, minLength)
     .map((v, i) => [v, b[i]])
     .reduce((x, y) => [...x, ...y], []);
-  return [...interleaved, ...(aLen < bLen ? b : a).slice(minLength)];
+  return [...interleaved, ...(aLength < bLength ? b : a).slice(minLength)];
 }
 
 function cylinder(spec) {
@@ -150,7 +142,7 @@ function randomName(info) {
     headers: {
       'User-Agent': 'Request-Promise',
     },
-    json: true, // Automatically stringifies the body to JSON
+    json: true,
   };
   return rp(options).then(data => `${data.surname}, ${data.name}`);
 }
