@@ -2,37 +2,38 @@ const crypto = require('crypto');
 const rp = require('request-promise');
 
 function change(cents) {
-  if (cents < 0) { throw new RangeError('amount cannot be negative'); }
+  if (cents < 0) {
+    throw new RangeError('amount cannot be negative');
+  }
   const denominations = [25, 10, 5, 1];
-  const numberOfCoins = [];
+  const results = [];
+  results.length = 3;
   let remainingChange = cents;
   denominations.forEach((denomination, index) => {
     if (index < denominations.length - 1) {
-      numberOfCoins[index] = Math.floor(remainingChange / denomination);
+      results[index] = Math.floor(remainingChange / denomination);
       remainingChange %= denomination;
     } else {
-      numberOfCoins[index] = remainingChange;
+      results[index] = remainingChange;
     }
   });
-  return numberOfCoins;
+  return results;
 }
 
 function stripQuotes(s) {
-  // return s.split('').filter(character => character !== '"' && character !== '\'').join('');
   return s.split(/['"]+/g).join('');
 }
 
 function scramble(s) {
-  const sArray = s.split('');
-  let currentIndex = sArray.length;
+  const array = s.split('');
+  let currentIndex = array.length;
   let randomIndex;
-
   while (currentIndex !== 0) {
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
-    [sArray[currentIndex], sArray[randomIndex]] = [sArray[randomIndex], sArray[currentIndex]];
+    [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
   }
-  return sArray.join('');
+  return array.join('');
 }
 
 function powers(base, limit, callback) {
@@ -52,46 +53,16 @@ function* powersGenerator(base, limit) {
   }
 }
 
-// function say2(message) {
-//   return message ? msg => (msg ? message + msg : message) : message;
-// }
-
-function say(message) {
-  const output = [];
-  const addMessages = (newMessage) => {
-    if (!newMessage) {
-      return output.join(' ');
-    }
-    output.push(newMessage);
-    return addMessages;
-  };
-  return addMessages(message);
+function say(a) {
+  return !a ? '' : b => (b ? say(`${a} ${b}`) : a);
 }
 
-// function interleaveToal(a, ...b) {
-//   const aLength = a.length;
-//   const bLength = b.length;
-//   const max = Math.max(aLength, bLength);
-//   const result = [];
-//   for (let i = 0; i < max; i += 1) {
-//     if (i < aLength) { result.push(a[i]); }
-//     if (i < bLength) { result.push(b[i]); }
-//   }
-//   return result;
-// }
-
-// function interleaveIan(arr1, ...arr2) {
-//   if (arr1.length === 0) { return arr2; }
-//   const result = arr1.map((v, i) => [v, arr2[i]]).reduce((a, b) => a.concat(b)).filter(n => n);
-//   return arr1.length < arr2.length ? result.concat(arr2.slice(arr1.length)) : result;
-// }
-
 function interleave(a, ...b) {
-  const [aLength, bLength, minLength] = [a.length, b.length, Math.min(a.length, b.length)];
+  const [aLen, bLen, minLength] = [a.length, b.length, Math.min(a.length, b.length)];
   const interleaved = a.slice(0, minLength)
     .map((v, i) => [v, b[i]])
     .reduce((x, y) => [...x, ...y], []);
-  return [...interleaved, ...(aLength < bLength ? b : a).slice(minLength)];
+  return [...interleaved, ...(aLen < bLen ? b : a).slice(minLength)];
 }
 
 function cylinder(spec) {
@@ -142,7 +113,7 @@ function randomName(info) {
     headers: {
       'User-Agent': 'Request-Promise',
     },
-    json: true,
+    json: true, // Automatically stringifies the body to JSON
   };
   return rp(options).then(data => `${data.surname}, ${data.name}`);
 }
