@@ -52,8 +52,8 @@ function* powersGenerator(base, limit) {
   }
 }
 
-function say(a) {
-  return !a ? '' : b => (b ? say(`${a} ${b}`) : a);
+function say(word) {
+  return !word ? '' : nextWord => (nextWord ? say(`${word} ${nextWord}`) : word);
 }
 
 function interleave(a, ...b) {
