@@ -42,7 +42,6 @@ function powers(base, limit, callback) {
     callback(currentValue);
     currentValue *= base;
   }
-  return currentValue;
 }
 
 function* powersGenerator(base, limit) {
