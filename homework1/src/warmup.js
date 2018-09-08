@@ -7,7 +7,6 @@ function change(cents) {
   }
   const denominations = [25, 10, 5, 1];
   const results = [];
-  results.length = 3;
   let remainingChange = cents;
   denominations.forEach((denomination, index) => {
     if (index < denominations.length - 1) {
