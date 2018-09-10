@@ -103,10 +103,11 @@ function randomName(info) {
   const { gender, region } = info;
   const options = {
     method: 'GET',
-    uri: 'https://uinames.com/api/?amount=1',
+    uri: 'https://uinames.com/api/',
     qs: {
       gender,
       region,
+      amount: 1,
     },
     headers: {
       'User-Agent': 'Request-Promise',
