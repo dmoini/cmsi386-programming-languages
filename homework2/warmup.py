@@ -29,18 +29,15 @@ def say(word=None):
     return '' if not word else lambda next_word=None: (say(f'{word} {next_word}') if next_word else word)
 
 
-# TODO
 def triples(limit):
-    # vals = []
-    # for c in range(1, limit + 1):
-    #     for b in range(1, c):
-    #         for a in range(1, b):
-    #             mylist = tuple(list(a, b, c))
-    #
-    #             if (a ** 2) + (b ** 2) == (c ** 2) and mylist not in vals:
-    #                 vals.append(mylist)
-    # return vals
-    pass
+    vals = []
+    for c in range(1, limit + 1):
+        for b in range(1, c):
+            for a in range(1, b):
+                abc_tuple = (a, b, c)
+                if a * a + b * b == c * c and abc_tuple not in vals:
+                    vals.append(abc_tuple)
+    return vals
 
 
 # TODO

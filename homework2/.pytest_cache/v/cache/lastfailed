@@ -3,6 +3,5 @@
   "tests/warmup_test.py::test_cylinder": true,
   "tests/warmup_test.py::test_interleave": true,
   "tests/warmup_test.py::test_powers": true,
-  "tests/warmup_test.py::test_random_name": true,
-  "tests/warmup_test.py::test_triples": true
+  "tests/warmup_test.py::test_random_name": true
 }
