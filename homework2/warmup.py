@@ -26,7 +26,7 @@ def scramble(s):
 
 
 def say(word=None):
-    return '' if not word else lambda next_word=None: (say(f'{word} {next_word}') if next_word else word)
+    return '' if not word else lambda next=None: (say(f'{word} {next}') if next else word)
 
 
 def triples(limit):
@@ -41,17 +41,16 @@ def triples(limit):
 
 
 def powers(base, limit):
-    currentPower = 0
-    while base ** currentPower <= limit:
-        yield base ** currentPower
-        currentPower += 1
+    current_power = 0
+    while base ** current_power <= limit:
+        yield base ** current_power
+        current_power += 1
 
 
-# TODO 7
 def interleave(a, *b):
-    aLength, bLength, minLength = len(a), len(b), min(len(a), len(b))
-    interleaved = [y for x in a for y in [x, 10*x]]
-    return interleaved
+    min_len = min(len(a), len(b))
+    interleaved = [val for pair in zip(a, b) for val in pair]
+    return interleaved + (a[min_len:] if len(a) > len(b) else list(b)[min_len:])
 
 
 # TODO 8

@@ -1,6 +1,5 @@
 {
   "tests/warmup_test.py::test_crypto": true,
   "tests/warmup_test.py::test_cylinder": true,
-  "tests/warmup_test.py::test_interleave": true,
   "tests/warmup_test.py::test_random_name": true
 }
