@@ -54,8 +54,24 @@ def interleave(a, *b):
 
 
 # TODO 8
-def Cylinder(spec):
-    pass
+class Cylinder():
+    def __init__(self, radius=1, height=1):
+        self.radius = radius
+        self.height = height
+
+    def volume(self):
+        return math.pi * (self.radius ** 2) * self.height
+
+    def surface_area(self):
+        return (2 * math.pi * self.radius * self.height) + (2 * math.pi * (self.radius ** 2))
+
+    def widen(self, factor):
+        self.radius *= factor
+        return self
+
+    def stretch(self, factor):
+        self.height *= factor
+        return self
 
 
 # TODO 9
