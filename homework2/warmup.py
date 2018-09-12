@@ -30,36 +30,40 @@ def say(word=None):
 
 
 def triples(limit):
-    vals = []
+    pythagorean_triples = set()
     for c in range(1, limit + 1):
         for b in range(1, c):
             for a in range(1, b):
                 abc_tuple = (a, b, c)
-                if a * a + b * b == c * c and abc_tuple not in vals:
-                    vals.append(abc_tuple)
-    return vals
+                if a * a + b * b == c * c:
+                    pythagorean_triples.add(abc_tuple)
+    return list(pythagorean_triples)
 
 
-# TODO
-def powers(base, limit, callback):
-    pass
+def powers(base, limit):
+    currentPower = 0
+    while base ** currentPower <= limit:
+        yield base ** currentPower
+        currentPower += 1
 
 
-# TODO
-def interleave():
-    pass
+# TODO 7
+def interleave(a, *b):
+    aLength, bLength, minLength = len(a), len(b), min(len(a), len(b))
+    interleaved = [y for x in a for y in [x, 10*x]]
+    return interleaved
 
 
-# TODO
+# TODO 8
 def Cylinder(spec):
     pass
 
 
-# TODO
+# TODO 9
 def make_crypto_functions():
     pass
 
 
-# TODO
+# TODO 10
 def random_name():
     pass
