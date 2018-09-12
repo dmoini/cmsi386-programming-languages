@@ -1,0 +1,12 @@
+[
+  "tests/warmup_test.py::test_change",
+  "tests/warmup_test.py::test_strip_quotes",
+  "tests/warmup_test.py::test_scramble",
+  "tests/warmup_test.py::test_say",
+  "tests/warmup_test.py::test_triples",
+  "tests/warmup_test.py::test_powers",
+  "tests/warmup_test.py::test_interleave",
+  "tests/warmup_test.py::test_cylinder",
+  "tests/warmup_test.py::test_crypto",
+  "tests/warmup_test.py::test_random_name"
+]
