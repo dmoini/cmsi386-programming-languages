@@ -2,6 +2,7 @@
 import math
 from random import sample
 from Crypto.Cipher import AES
+import requests
 
 
 def change(cents):
@@ -85,9 +86,15 @@ def make_crypto_functions(key, iv):
 
 
 # TODO 10
-def random_name():
-    pass
+# https://www.dataquest.io/blog/python-api-tutorial/
+def random_name(**data):
+    data.update({'amount': 1})
+    r = requests.get('https://uinames.com/api/', params=data)
+    info = r.json()
+    # if info['gender'] not 'female':
+    #     raise ValueError(info)
+    # return f"{r['surname']}, {r['name']}"
 
-
-testCylinder = Cylinder(2, 1)
-print(testCylinder.volume())
+    print(info)
+    # return str(r['surname']) + ', ' + str(r['name'])
+    return f'{r["surname"]}, {r["name"]}'
