@@ -3,6 +3,7 @@ import math
 from random import sample
 from Crypto.Cipher import AES
 import requests
+import itertools
 
 
 def change(cents):
@@ -91,10 +92,7 @@ def random_name(**data):
     data.update({'amount': 1})
     r = requests.get('https://uinames.com/api/', params=data)
     info = r.json()
-    # if info['gender'] not 'female':
-    #     raise ValueError(info)
-    # return f"{r['surname']}, {r['name']}"
-
-    print(info)
-    # return str(r['surname']) + ', ' + str(r['name'])
-    return f'{r["surname"]}, {r["name"]}'
+    if 'error' in info:
+        raise ValueError('{{"error": "{error}"}}'.format(**info))
+        # raise ValueError(info)
+    return f'{info["surname"]}, {info["name"]}'
