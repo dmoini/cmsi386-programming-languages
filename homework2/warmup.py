@@ -87,7 +87,6 @@ def make_crypto_functions(key, iv):
     return (encrypt, decrypt)
 
 
-# TODO 10
 # https://www.dataquest.io/blog/python-api-tutorial/
 def random_name(**data):
     data.update({'amount': 1})
