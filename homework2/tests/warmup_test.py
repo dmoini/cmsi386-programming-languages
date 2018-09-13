@@ -93,8 +93,8 @@ def test_cylinder():
     assert c.height == 1
     assert c.radius == 1
     c = Cylinder(radius=2, height=10)
-    assert pytest.approx(c.volume(), 0.000001) == 40 * math.pi
-    assert pytest.approx(c.surface_area(), 0.000001) == 48 * math.pi
+    assert pytest.approx(c.volume, 0.000001) == 40 * math.pi
+    assert pytest.approx(c.surface_area, 0.000001) == 48 * math.pi
     c.widen(3)
     assert c.radius == 6
     c.stretch(2)
