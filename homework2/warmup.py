@@ -82,3 +82,7 @@ def make_crypto_functions():
 # TODO 10
 def random_name():
     pass
+
+
+testCylinder = Cylinder(2, 1)
+print(testCylinder.volume())
