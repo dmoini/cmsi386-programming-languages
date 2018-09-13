@@ -1,6 +1,7 @@
 # Homework2
 import math
 from random import sample
+from Crypto.Cipher import AES
 
 
 def change(cents):
@@ -53,7 +54,6 @@ def interleave(a, *b):
     return interleaved + (a[min_len:] if len(a) > len(b) else list(b)[min_len:])
 
 
-# TODO 8
 class Cylinder():
     def __init__(self, radius=1, height=1):
         self.radius = radius
@@ -74,9 +74,14 @@ class Cylinder():
         return self
 
 
-# TODO 9
-def make_crypto_functions():
-    pass
+# https://docs.python-guide.org/scenarios/crypto/
+def make_crypto_functions(key, iv):
+    def encrypt(message):
+        return AES.new(key, AES.MODE_CBC, iv).encrypt(message)
+
+    def decrypt(cipher):
+        return AES.new(key, AES.MODE_CBC, iv).decrypt(cipher)
+    return (encrypt, decrypt)
 
 
 # TODO 10
