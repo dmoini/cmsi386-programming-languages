@@ -3,7 +3,6 @@ import math
 from random import sample
 from Crypto.Cipher import AES
 import requests
-import itertools
 
 
 def change(cents):
@@ -61,9 +60,11 @@ class Cylinder():
         self.radius = radius
         self.height = height
 
+    @property
     def volume(self):
         return math.pi * (self.radius ** 2) * self.height
 
+    @property
     def surface_area(self):
         return (2 * math.pi * self.radius * self.height) + (2 * math.pi * (self.radius ** 2))
 
@@ -93,6 +94,5 @@ def random_name(**data):
     r = requests.get('https://uinames.com/api/', params=data)
     info = r.json()
     if 'error' in info:
-        raise ValueError('{{"error": "{error}"}}'.format(**info))
-        # raise ValueError(info)
+        raise ValueError(f'{{"error": "{info["error"]}"}}')
     return f'{info["surname"]}, {info["name"]}'
