@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/dmoini/cmsi386-programming-languages#readme",
   "dependencies": {
+    "ajv": "^6.5.3",
     "request": "^2.88.0",
     "request-promise": "^4.2.2"
   },
