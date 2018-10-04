@@ -13,11 +13,9 @@ def test_change():
     assert change(144) == (5, 1, 1, 4)
     assert change(97) == (3, 2, 0, 2)
     assert change(100000000000) == (4000000000, 0, 0, 0)
-    assert change(33.25) == (1, 0, 1, 3.25)
     with pytest.raises(ValueError) as excinfo:
         change(-50)
     assert str(excinfo.value) == 'amount cannot be negative'
-
 
 def test_strip_quotes():
     assert strip_quotes('') == ''
@@ -25,22 +23,19 @@ def test_strip_quotes():
     assert strip_quotes('"\'') == ''
     assert strip_quotes('a"""\'\'"z') == 'az'
 
-
 def test_scramble():
-    for s in ['a', 'rat', 'JavaScript testing', '', 'zzz', '^*&^*&^▱ÄÈËɡɳɷ']:
+    for s in ['a', 'rat', 'JavaScript testing', '', 'zzz', '^*))^*>^▱ÄÈËɡɳɷ']:
         assert sorted(s) == sorted(scramble(s))
     possibilities = set(['ABC', 'ACB', 'BAC', 'BCA', 'CAB', 'CBA'])
     for _ in range(200):
         possibilities.discard(scramble('ABC'))
     assert not possibilities
 
-
 def test_say():
     assert say() == ''
     assert say('hi')() == 'hi'
     assert say('hi')('there')() == 'hi there'
     assert say('hello')('my')('name')('is')('Colette')() == 'hello my name is Colette'
-
 
 def test_triples():
     assert triples(0) == []
@@ -49,7 +44,6 @@ def test_triples():
                                     (9, 12, 15), (10, 24, 26), (12, 16, 20), (12, 35, 37),
                                     (15, 20, 25), (15, 36, 39), (16, 30, 34), (18, 24, 30),
                                     (20, 21, 29), (21, 28, 35), (24, 32, 40)])
-
 
 def test_powers():
     p = powers(2, 10)
@@ -65,7 +59,6 @@ def test_powers():
     assert list(powers(2, 63)) == [1, 2, 4, 8, 16, 32]
     assert list(powers(2, 64)) == [1, 2, 4, 8, 16, 32, 64]
 
-
 def test_interleave():
     assert interleave([]) == []
     assert interleave([1, 4, 6]) == [1, 4, 6]
@@ -77,7 +70,6 @@ def test_interleave():
     assert interleave(a, 10, 20, 30) == [1, 10, 2, 20, 3, 30, 4]
     # Test input list not destroyed
     assert a == [1, 2, 3, 4]
-
 
 def test_cylinder():
     c = Cylinder(radius=10, height=5)
@@ -102,15 +94,11 @@ def test_cylinder():
     assert pytest.approx(c.surface_area, 0.000001) == 312 * math.pi
     assert pytest.approx(c.volume, 0.000001) == 720 * math.pi
 
-
 def test_crypto():
-    assert isinstance(make_crypto_functions('zombie devops feynman123', '0000000000000000'), tuple)
-    e, d = make_crypto_functions('zombie devops feynman123', '0000000000000000')
-    assert e(b'Hello......world') == b'\x15\x8a\xa5a\xd8\x07\\d(e\xc9\xbes*\x13\x9f'
-    assert d(b'\x15\x8a\xa5a\xd8\x07\\d(e\xc9\xbes*\x13\x9f') == b'Hello......world'
-    for s in [b'', b'\xfe9iP\x05\x22\x490opXZ@1##']:
+    assert isinstance(make_crypto_functions(b"A2qK5XG3qX1MfLrGacD9AGVG2sbZYkvFFki94qbkVhE="), tuple)
+    e, d = make_crypto_functions(b"A2qK5XG3qX1MfLrGacD9AGVG2sbZYkvFFki94qbkVhE=")
+    for s in [b'', b'\xfe9iP\x05\x22\x490opXZ@1##', b'Helllllllllooooooo world']:
         assert d(e(s)) == s
-
 
 def test_random_name():
     p = random_name(gender='female', region='canada')
