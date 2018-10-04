@@ -1,7 +1,8 @@
 # Homework2
 import math
 from random import sample
-from Crypto.Cipher import AES
+# from Crypto.Cipher import AES
+from cryptography.fernet import Fernet
 import requests
 
 
@@ -77,14 +78,15 @@ class Cylinder():
         return self
 
 
-# https://docs.python-guide.org/scenarios/crypto/
-# TODO
-def make_crypto_functions(key, iv):
-    def encrypt(message):
-        return AES.new(key, AES.MODE_CBC, iv).encrypt(message)
+# https://cryptography.io/en/latest/
+def make_crypto_functions(fernet_key):
+    cipher = Fernet(fernet_key)
 
-    def decrypt(cipher):
-        return AES.new(key, AES.MODE_CBC, iv).decrypt(cipher)
+    def encrypt(bytes):
+        return cipher.encrypt(bytes)
+
+    def decrypt(bytes):
+        return cipher.decrypt(bytes)
     return (encrypt, decrypt)
 
 
