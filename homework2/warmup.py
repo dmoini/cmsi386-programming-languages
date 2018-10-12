@@ -92,9 +92,13 @@ def make_crypto_functions(fernet_key):
 
 # https://www.dataquest.io/blog/python-api-tutorial/
 def random_name(**data):
-    data.update({'amount': 1})
-    r = requests.get('https://uinames.com/api/', params=data)
+    params = {'amount': 1}
+    if 'gender' in data:
+        params.update({'gender': data['gender']})
+    if 'region' in data:
+        params.update({'region': data['region']})
+    r = requests.get('https://uinames.com/api/', params=params)
     info = r.json()
     if 'error' in info:
         raise ValueError(f'{{"error": "{info["error"]}"}}')
-    return f'{info["surname"]}, {info["name"]}'
+    return f"{info['surname']}, {info['name']}"
