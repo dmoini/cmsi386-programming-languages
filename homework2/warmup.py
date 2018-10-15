@@ -100,5 +100,6 @@ def random_name(**data):
     r = requests.get('https://uinames.com/api/', params=params)
     info = r.json()
     if 'error' in info:
-        raise ValueError(f'{{"error": "{info["error"]}"}}')
-    return f"{info['surname']}, {info['name']}"
+        # raise ValueError(f'{{"error": "{info["error"]}"}}') ... f-string version
+        raise ValueError('{"error": "' + info['error'] + '"}')
+    return info['surname'] + ", " + info['name']
