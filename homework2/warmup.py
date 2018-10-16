@@ -1,9 +1,9 @@
 # Homework2
 import math
 from random import sample
-# from Crypto.Cipher import AES
 from cryptography.fernet import Fernet
 import requests
+from itertools import product
 
 
 def change(cents):
@@ -33,14 +33,8 @@ def say(word=None):
 
 
 def triples(limit):
-    pythagorean_triples = set()
-    for c in range(1, limit + 1):
-        for b in range(1, c):
-            for a in range(1, b):
-                abc_tuple = (a, b, c)
-                if a * a + b * b == c * c:
-                    pythagorean_triples.add(abc_tuple)
-    return list(pythagorean_triples)
+    return [(a, b, c) for a, b, c in product(range(1, limit + 1), repeat=3)
+            if a < b < c and a ** 2 + b ** 2 == c ** 2]
 
 
 def powers(base, limit):
