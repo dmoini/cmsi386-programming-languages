@@ -1,4 +1,11 @@
 // IMPORTS GO HERE
+import java.util.regex.Pattern;
+import java.util.Map;
+import java.util.Optional;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+// import java.util.*;
 
 public class StreamPractice {
 
