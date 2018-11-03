@@ -64,3 +64,4 @@ env
 .cache
 __pycache__
 *.pyc
+.vscode
