@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 // import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.Comparator;
 
 // import java.util.*;
 
@@ -54,26 +55,13 @@ public class StreamPractice {
         // the highest average over all batters that have at least
         // 100 at-bats.
 
-        var bestBatters = new HashMap<String, Optional<Batter>>();
+        var bestBatters = new HashMap<String, Optional<Batter>>();    
+
         reader.lines()
         .map(b -> new Batter(b))
-        .forEach(b -> bestBatters.put(b.team, Optional.empty()));
-        
-        reader.lines()
-        .map(b -> new Batter(b)
-        .filter(b -> b.atBats > 99)
-        .forEach(b -> bestBatter.put(b.team, Optional.ofNullable(b).orElse(b))));             
-
-        // reader.lines()
-        // .map(b -> new Batter(b))
-        // .forEach(b -> bestBatters.put(b.team, Optional.of(b).filter(a -> a.atBats > 99 && a.average > bestBatters.get);
-        // System.out.println(bestBatters);
+        .filter(a -> a.atBats >= 100)
+        .collect(Collectors.groupingBy(b -> b.team, HashMap::new, Collectors.maxBy(Comparator.comparing(b -> b.average))))
+        .forEach((k, v) -> bestBatters.put(k, v));
         return bestBatters;
-    }
-
-    public static void main(String[] args) throws Exception {
-        var reader = new BufferedReader(new FileReader("batting_average_input.txt"));
-        var actual = bestBatterByTeam(reader);
-        // System.out.println(actual);
     }
 }
