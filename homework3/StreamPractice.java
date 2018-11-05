@@ -5,13 +5,8 @@ import java.util.TreeMap;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 import java.util.Optional;
-import java.io.IOException;
-import java.io.InputStreamReader;
-// import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.Comparator;
-
-// import java.util.*;
 
 public class StreamPractice {
 
@@ -54,19 +49,12 @@ public class StreamPractice {
         // Return a map that records, for each team, the b with
         // the highest average over all batters that have at least
         // 100 at-bats.
-
         var bestBatters = new HashMap<String, Optional<Batter>>();    
-
         reader.lines()
         .map(b -> new Batter(b))
         .filter(a -> a.atBats >= 100)
         .collect(Collectors.groupingBy(b -> b.team, HashMap::new, Collectors.maxBy(Comparator.comparing(b -> b.average))))
         .forEach((team, batter) -> bestBatters.put(team, batter));
         return bestBatters;
-    }
-
-    public static void main(String[] args) throws Exception {
-        var reader = new BufferedReader(new FileReader("word_count_input.txt"));
-        wordCountByLength(reader);
     }
 }
