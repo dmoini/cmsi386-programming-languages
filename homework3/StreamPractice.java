@@ -25,8 +25,8 @@ public class StreamPractice {
         reader.lines()
         .flatMap(line -> nonWord.splitAsStream(line.toLowerCase()))
         .filter(word -> !word.isEmpty())
-        .collect(Collectors.groupingBy(w->w, TreeMap::new, Collectors.counting()))
-        .forEach((word, count) -> tm.put(word.length(), count));
+        .collect(Collectors.groupingBy(w->w.length(), TreeMap::new, Collectors.counting()))
+        .forEach((length, count) -> tm.put(length, count));
         return tm;
     }
 
@@ -61,7 +61,12 @@ public class StreamPractice {
         .map(b -> new Batter(b))
         .filter(a -> a.atBats >= 100)
         .collect(Collectors.groupingBy(b -> b.team, HashMap::new, Collectors.maxBy(Comparator.comparing(b -> b.average))))
-        .forEach((k, v) -> bestBatters.put(k, v));
+        .forEach((team, batter) -> bestBatters.put(team, batter));
         return bestBatters;
+    }
+
+    public static void main(String[] args) throws Exception {
+        var reader = new BufferedReader(new FileReader("word_count_input.txt"));
+        wordCountByLength(reader);
     }
 }
