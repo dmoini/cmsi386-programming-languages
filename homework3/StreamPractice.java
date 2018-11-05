@@ -18,9 +18,9 @@ public class StreamPractice {
         // in the reader with that length.
 
         return reader.lines()
-        .flatMap(line -> nonWord.splitAsStream(line.toLowerCase()))
-        .filter(word -> !word.isEmpty())
-        .collect(Collectors.groupingBy(w->w.length(), TreeMap::new, Collectors.counting()));
+            .flatMap(line -> nonWord.splitAsStream(line.toLowerCase()))
+            .filter(word -> !word.isEmpty())
+            .collect(Collectors.groupingBy(w->w.length(), TreeMap::new, Collectors.counting()));
     }
 
     public static class Batter {
@@ -49,8 +49,8 @@ public class StreamPractice {
         // 100 at-bats.
   
         return reader.lines()
-        .map(b -> new Batter(b))
-        .filter(a -> a.atBats >= 100)
-        .collect(Collectors.groupingBy(b -> b.team, HashMap::new, Collectors.maxBy(Comparator.comparing(b -> b.average))));
+            .map(b -> new Batter(b))
+            .filter(a -> a.atBats >= 100)
+            .collect(Collectors.groupingBy(b -> b.team, HashMap::new, Collectors.maxBy(Comparator.comparing(b -> b.average))));
     }
 }
