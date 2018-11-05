@@ -1,10 +1,13 @@
-// IMPORTS GO HERE
-import java.util.regex.Pattern;
-import java.util.Map;
-import java.util.Optional;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.regex.Pattern;
+import java.util.Optional;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.stream.Collectors;
+
 // import java.util.*;
 
 public class StreamPractice {
@@ -15,6 +18,13 @@ public class StreamPractice {
         // Return a tree map whose keys are word lengths
         // and corresponding values are the number of words
         // in the reader with that length.
+        TreeMap<Integer, Long> tm = new TreeMap<Integer, Long>();
+        reader.lines()
+        .flatMap(line -> nonWord.splitAsStream(line.toLowerCase()))
+        .filter(word -> !word.isEmpty())
+        .collect(Collectors.groupingBy(w->w, TreeMap::new, Collectors.counting()))
+        .forEach((word, count) -> tm.put(word.length(), count));
+        return tm;
     }
 
     public static class Batter {
@@ -36,9 +46,12 @@ public class StreamPractice {
         }
     }
 
-    public static Map<String, Optional<Batter>> bestBatterByTeam(BufferedReader reader) {
+    public static int bestBatterByTeam(BufferedReader reader) {
         // Return a map that records, for each team, the batter with
         // the highest average over all batters that have at least
         // 100 at-bats.
+        // HashMap<String, Optional<Batter>> thing = new HashMap<String, Optional<Batter>>();
+        // return thing;
+        return 2;
     }
 }
