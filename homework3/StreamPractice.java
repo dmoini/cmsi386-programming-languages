@@ -57,26 +57,23 @@ public class StreamPractice {
         var bestBatters = new HashMap<String, Optional<Batter>>();
         reader.lines()
         .map(b -> new Batter(b))
-        // .forEach(b -> bestBatters.put(b.team, Optional.empty()));
-        // .forEach(b -> System.out.println(b.team + " ---- player: " + b));
-        .filter(b -> b.atBats >= 100)
-        // .collect(Collectors.groupingBy(b->b.team, HashMap::new, Batter::getAtBats))
-        // .collect(Collectors.toMap(b -> b, b-> b.team))
-        // .forEach((b, team) -> { if (!bestBatters.containsKey(team) || bestBatters.get(team).average < b.average) { 
-        //                                 bestBatters.put(team, b); 
-        //                             }});
-        .forEach(b -> { System.out.println(b.team + ": " + b.atBats); });
-        // .forEach(b -> { if (!bestBatters.containsKey(b.team) || bestBatters.get(b.team).average < b.average) {
-        //     bestBatters.put(b.team, Optional(Batter));
-        // }});
-        System.out.println(bestBatters);
+        .forEach(b -> bestBatters.put(b.team, Optional.empty()));
+        
+        reader.lines()
+        .map(b -> new Batter(b)
+        .filter(b -> b.atBats > 99)
+        .forEach(b -> bestBatter.put(b.team, Optional.ofNullable(b).orElse(b))));             
+
+        // reader.lines()
+        // .map(b -> new Batter(b))
+        // .forEach(b -> bestBatters.put(b.team, Optional.of(b).filter(a -> a.atBats > 99 && a.average > bestBatters.get);
+        // System.out.println(bestBatters);
         return bestBatters;
     }
 
     public static void main(String[] args) throws Exception {
-        // Batter teams = new Batter
         var reader = new BufferedReader(new FileReader("batting_average_input.txt"));
         var actual = bestBatterByTeam(reader);
-        System.out.println(actual);
+        // System.out.println(actual);
     }
 }
