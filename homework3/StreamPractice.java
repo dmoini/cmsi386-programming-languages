@@ -16,13 +16,11 @@ public class StreamPractice {
         // Return a tree map whose keys are word lengths
         // and corresponding values are the number of words
         // in the reader with that length.
-        var tm = new TreeMap<Integer, Long>();
-        reader.lines()
+
+        return reader.lines()
         .flatMap(line -> nonWord.splitAsStream(line.toLowerCase()))
         .filter(word -> !word.isEmpty())
-        .collect(Collectors.groupingBy(w->w.length(), TreeMap::new, Collectors.counting()))
-        .forEach((length, count) -> tm.put(length, count));
-        return tm;
+        .collect(Collectors.groupingBy(w->w.length(), TreeMap::new, Collectors.counting()));
     }
 
     public static class Batter {
@@ -49,12 +47,10 @@ public class StreamPractice {
         // Return a map that records, for each team, the b with
         // the highest average over all batters that have at least
         // 100 at-bats.
-        var bestBatters = new HashMap<String, Optional<Batter>>();    
-        reader.lines()
+  
+        return reader.lines()
         .map(b -> new Batter(b))
         .filter(a -> a.atBats >= 100)
-        .collect(Collectors.groupingBy(b -> b.team, HashMap::new, Collectors.maxBy(Comparator.comparing(b -> b.average))))
-        .forEach((team, batter) -> bestBatters.put(team, batter));
-        return bestBatters;
+        .collect(Collectors.groupingBy(b -> b.team, HashMap::new, Collectors.maxBy(Comparator.comparing(b -> b.average))));
     }
 }
