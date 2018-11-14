@@ -1,11 +1,17 @@
 #include <iostream>
 #include <string>
 #include <map>
-#include <iterator>
 #include <vector>
 
 using namespace std;
-typedef std::pair<std::string,int> pair;
+
+template<typename T1, typename T2>
+struct compareCount {
+    typedef pair<T1, T2> type;
+    bool operator()(type const& a, type const& b) const {
+        return a.second > b.second;
+    }
+};
 
 int main() {
     string text;
@@ -25,15 +31,12 @@ int main() {
         }
     }
     
-    vector<pair<string, int> > 
+    vector<pair<string, int> > wordCountVector(wordCount.begin(), wordCount.end());
+    sort(wordCountVector.begin(), wordCountVector.end(), compareCount<string, int>());
 
-    std::copy(map.begin(), map.end()),
-        [](const pair& l, const pair& r) {
-            if (l.second != r.second)
-        }
-    int wordCountLength = wordCount.size();
-    for (std::map <string, int>::iterator it = wordCount.begin(); it != wordCount.end(); ++it) {
-        cout << it -> first << " " << it -> second << endl;
+    int wordCountSize = wordCountVector.size();
+    for(int i = 0; i < wordCountSize; i++) {
+        cout << wordCountVector[i].first << " " << wordCountVector[i].second << endl;
     }
     return 0;
 }
