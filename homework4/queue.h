@@ -18,21 +18,18 @@ public:
     // Default Constructor
     Queue(): head(nullptr), tail(nullptr), size(0) {}
 
+    // Destructor
+    ~Queue() {
+        while (head != nullptr) {
+            dequeue();
+        }
+    }
+
     // Move constructor
     Queue(Queue&& other): head(other.head), tail(other.tail), size(other.size) {
         other.head = nullptr;
         other.tail = nullptr;
         other.size = 0;
-    }
-
-    // Destructor
-    ~Queue() {
-        // delete head;
-        // delete tail;
-        // delete size;
-        while (head != nullptr) {
-            dequeue();
-        }
     }
 
     // Move assignment operator.
@@ -48,7 +45,7 @@ public:
         return *this;
     }
 
-    friend ostream& operator() << (ostream& os, const Queue& q) {
+    friend ostream& operator << (ostream& os, const Queue& q) {
         os << "Head node: " << q.head -> data << "\nTail data: " << q.tail -> data << "\nQueue size: " << q.size << endl;
         return os;
     }
@@ -58,15 +55,13 @@ public:
     }
     
     void enqueue(T newData) {
-        Node *newNode = new Node;
-        newNode -> data = newData;
-        newNode -> next = nullptr;
+        Node *newNode = new Node {newData, nullptr};
         if (head == nullptr) {
             head = newNode;
             tail = newNode;
         } else {
             tail -> next = newNode;
-            newNode -> next = nullptr;
+            tail = newNode;
         }
         size++;
     }
