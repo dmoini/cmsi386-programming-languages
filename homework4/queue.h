@@ -30,6 +30,15 @@ public:
         }
     }
 
+    // Copy constructor disabled
+
+    Queue(const Queue& q) = delete;
+
+    // Copy assignment operator disabled
+
+    Queue& operator=(const Queue& q) = delete;
+
+
     // Move constructor
     Queue(Queue&& other): head(other.head), tail(other.tail), size(other.size) {
         other.head = nullptr;

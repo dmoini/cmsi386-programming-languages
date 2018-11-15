@@ -75,7 +75,5 @@ int main() {
     testDequeue();
     testEnqueueAndDequeueAndSize();
     testDequeueOnEmptyQueue();
-    
-
     cout << "All tests passed :)\n";
 }
