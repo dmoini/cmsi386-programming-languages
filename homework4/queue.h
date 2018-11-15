@@ -2,24 +2,29 @@
 #include <iostream>
 using namespace std;
 
+extern int destructorCalls;
+
 template <typename T>
 class Queue {
     struct Node {
         T data;
         Node* next;
     };
-    
+
 private:
     Node* head;
     Node* tail;
     int size;
 
+
 public:
     // Default Constructor
-    Queue(): head(nullptr), tail(nullptr), size(0) {}
+    Queue(): head(nullptr), tail(nullptr), size(0){}
 
     // Destructor
+    // int destructorCalls = 0;
     ~Queue() {
+        destructorCalls++;
         while (head != nullptr) {
             dequeue();
         }
@@ -53,6 +58,7 @@ public:
     int getSize() {
         return size;
     }
+
     
     void enqueue(T newData) {
         Node *newNode = new Node {newData, nullptr};

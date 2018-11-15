@@ -4,6 +4,7 @@
 #include "queue.h"
 using namespace std;
 
+int destructorCalls = 0;
 void testEmptyQueue() {
     Queue<string> q;
     assert(q.getSize() == 0);
@@ -57,11 +58,24 @@ void testDequeueOnEmptyQueue() {
     }
 }
 
+void testDestructor() {
+    Queue<string> test1;
+    Queue<string> test2;
+    Queue<string> test3;
+}
+
+void testMoveOperator() {
+
+}
 int main() {
+    testDestructor();
+    assert(destructorCalls == 3);
     testEmptyQueue();
     testEnqueue();
     testDequeue();
     testEnqueueAndDequeueAndSize();
     testDequeueOnEmptyQueue();
+    
+
     cout << "All tests passed :)\n";
 }
