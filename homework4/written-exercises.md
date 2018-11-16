@@ -53,36 +53,25 @@ public:
 };
 ```
 
-
 ### Does the representation of a Derived object contain one b field or two? If two, are both accessible, or only one? Under what circumstances? Tell the story of how things are.
 
 When we "redefine" a field in a C++ subclass, the field in the subclass will *shadow* or *hide* the field in the Base class.
 The Base class field ```std::string b``` is hidden by the Derived Base class field ```int b```. 
-Thus the representation of the Derived object will contain one ```b``` field since the other is hidden.
-It is important to note that both **b** fields in the **Base** and **Derived** classes are *public* (by default a class fields are *private*) so that both **b** fields are able to be accessed and manipulated in a **Derived** object.
-The Base field ```b``` can be accessed or *visible* through multiple ways: (1) make the call explicit, (2) add a declaration to the Derived class, or (3) calling the function through a base reference.
+The representation of the Derived object, however, does contain all the fields of the Base. It just needs to be more explicitly called. 
+It is important to note that both **b** fields in the **Base** and **Derived** classes are *public* (by default a class fields are *private*) so that both **b** fields are able to be accessed and manipulated in a **Derived** object. If it was private, it would be unaccessible. 
+The Base field ```b``` can be accessed or made *visible* through various ways:
 
-1) 
+1) Use a qualified field accessor to access Base field b.
 ```C++
   derived.Base::b = "Python is better";
 ```
 
-2) 
-```C++
-  class Derived: public Base { 
-    public: 
-      using Derived::b;
-      float c; 
-      int b;
-  };
-```
-
-3)
+2) Use a base reference on a derived object to access Base field b. 
 ```C++
   Base& bref = derived;
   bref.b = "Even f**king Java is better";
 ```
-Thus, the representation of a **Derived** object contains two **b** fields, both of which are accessible.
+
 
 ### 5) What does the following C++ program output?
 ```C++
