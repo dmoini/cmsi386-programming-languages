@@ -52,8 +52,29 @@ public:
   int b;
 };
 ```
+
+
 ### Does the representation of a Derived object contain one b field or two? If two, are both accessible, or only one? Under what circumstances? Tell the story of how things are.
-TODO
+
+When we "redefine" a field in a C++ subclass, the field in the subclass will *shadow* or *hide* the field in the Base class. The Base class field ```std::string b``` is hidden by the Derived Base class field ```int b```. Thus the representation of the Derived object will contain one ```b``` field since the other is hidden. The Base field ```b``` can be accessed or *visible* through multiple ways: (1) make the call explicit, (2) add a declaration to the Derived class, or (3) calling the function through a base reference.
+
+1) ```C++
+    derived.Base::b = "Python is better";
+    ```
+
+2) ```C++
+    class Derived: public Base { 
+      public: 
+        using Derived::b;
+        float c; 
+        int b;
+    };
+    ```
+
+3) ```C++
+    Base& bref = derived;
+    bref.b = "Even f**king Java is better";
+    ```
 
 ### 5) What does the following C++ program output?
 ```C++
