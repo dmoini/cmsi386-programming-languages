@@ -2,8 +2,6 @@
 #include <iostream>
 using namespace std;
 
-extern int destructorCalls;
-
 template <typename T>
 class Queue {
     struct Node {
@@ -22,22 +20,17 @@ public:
     Queue(): head(nullptr), tail(nullptr), size(0){}
 
     // Destructor
-    // int destructorCalls = 0;
     ~Queue() {
-        destructorCalls++;
         while (head != nullptr) {
             dequeue();
         }
     }
 
     // Copy constructor disabled
-
     Queue(const Queue& q) = delete;
 
     // Copy assignment operator disabled
-
     Queue& operator=(const Queue& q) = delete;
-
 
     // Move constructor
     Queue(Queue&& other): head(other.head), tail(other.tail), size(other.size) {
@@ -64,7 +57,7 @@ public:
         return os;
     }
 
-    int getSize() {
+    int get_size() {
         return size;
     }
 
