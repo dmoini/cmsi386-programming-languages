@@ -21,7 +21,7 @@ address for A[3][7] is 37 bytes away, which is 296 bits.
 ### 2) Explain the meaning of the following C++ declarations:
 
 ```C++
-adouble *a[n];
+double *a[n];
 double (*b)[n];
 double (*c[n])();
 double (*d())[n];
