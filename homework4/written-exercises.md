@@ -134,11 +134,13 @@ Since **g()** does contain an int **x**, **f()** prints this int **x** that is e
 (a)
 
 ```C++
-void shuffle(void* array, int length)
+template<typename T>
+void shuffle(T array[], int length)
 ```
 
 (b)
 
 ```C++
-void shuffle(std::array<T, n>& array)
+template<typename T>
+void shuffle(std::array<T> array)
 ```
