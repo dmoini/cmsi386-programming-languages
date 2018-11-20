@@ -1,6 +1,4 @@
-# Donovan Moini and Ian Lizarda
-
-## (and Teddy Chu)
+# Donovan Moini, Ian Lizarda, and Teddy Chu
 
 ### 1) Given the C++ declaration:
 
