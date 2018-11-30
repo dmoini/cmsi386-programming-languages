@@ -3,7 +3,7 @@
  */
 
 const request = require('request-promise');
-const crypto = require('crypto');
+const cryptoKey = require('crypto');
 
 /*
  * Returns an array with the minimum number of U.S. quarters, dimes, nickels, and
@@ -11,23 +11,22 @@ const crypto = require('crypto');
  * variables because it's rather common in JavaScript. If you want a more functional
  * solution see http://cs.lmu.edu/~ray/notes/functionalprogramming/.
  */
-const change = (amount) => {
+const change = (amount: number): [number, number, number, number] => {
   if (amount < 0) {
-    throw new RangeError('amount cannot be negative');
-  }
-  const result = [];
-  let remaining = amount;
-  [25, 10, 5, 1].forEach((value) => {
-    result.push(Math.floor(remaining / value));
-    remaining %= value;
-  });
-  return result;
+    throw new RangeError('amount cannot be negative')
+  } 
+  let [remaining, quarters, dimes, nickels, pennies] = [amount, 0, 0, 0, 0]
+  quarters = Math.floor(remaining / 25), remaining %= 25
+  dimes = Math.floor(remaining / 10), remaining %= 10
+  nickels = Math.floor(remaining / 5), remaining %= 5
+  pennies = remaining
+  return [quarters, dimes, nickels, pennies]
 };
 
 /*
  * Returns a copy of the string with apostrophes and double quotes removed.
  */
- const stripQuotes = s => s.replace(/['"]/g, '');
+ const stripQuotes = (s: string): string => s.replace(/['"]/g, '');
 
 /*
  * Returns a random permutation of a string. This is a swap-based implementation of
@@ -37,7 +36,7 @@ const change = (amount) => {
  * performance testing to compare it with a version that destroys one array or string
  * as it pulls characters from it and adds them to a result.
  */
-const scramble = (s) => {
+const scramble = (s: string): string => {
   const characters = s.split('');
   let j = characters.length;
   while (j) {
@@ -52,8 +51,10 @@ const scramble = (s) => {
  * callback. This is one of the few fairly decent uses of the classic for-statement,
  * I think.
  */
-const powers = (base, limit, callback) => {
-  let power = 1;
+
+//  Using void is safer because it prevents you from accidently using the return value of x in an unchecked way:
+const powers = (base: number, limit: number, callback: (p: number) => void) => { 
+  let power: number = 1;
   while (power <= limit) {
     callback(power);
     power *= base;
@@ -63,7 +64,7 @@ const powers = (base, limit, callback) => {
 /*
  * A generator that generates successive powers of a base, up to the given limit.
  */
-const powersGenerator = function* (base, limit) { // eslint-disable-line func-names
+const powersGenerator = function* (base: number, limit: number): IterableIterator<number> { // eslint-disable-line func-names
   for (let power = 1; power <= limit; power *= base) {
     yield power;
   }
@@ -78,9 +79,9 @@ const powersGenerator = function* (base, limit) { // eslint-disable-line func-na
  * The golfed version is very cool but isn't quite accurate, because it uses falsiness,
  * not undefinedness, as determining whether or not an argument was passed.
  */
-const say = (firstWord) => {
+const say = (firstWord: string): string | ((word: string) => string | any) => {
   const words = [];
-  function sayMore(word) {
+  function sayMore(word: string) {
     if (word === undefined) {
       return words.join(' ');
     }
@@ -94,7 +95,7 @@ const say = (firstWord) => {
  * Returns the interleaving of an array with a bunch of values. The lengths of the
  * array and the number of values do not need to be the same.
  */
-const interleave = (a, ...b) => {
+const interleave = (a: any[], ...b: any[]): any[] => {
   const firstLength = a.length;
   const secondLength = b.length;
   const max = Math.max(firstLength, secondLength);
@@ -106,10 +107,12 @@ const interleave = (a, ...b) => {
   return result;
 };
 
+// TODO:
 /*
  * Creates a cylinder object in the "Crockford Classes" style. There are no units for
  * the radius and height.
  */
+// TODO: update to actual class
 const cylinder = (specification) => {
   let { radius = 1, height = 1 } = specification;
   const capArea = () => Math.PI * radius * radius;
@@ -129,6 +132,7 @@ const cylinder = (specification) => {
   });
 };
 
+// TODO
 /*
  * Returns an array of two functions, an encyptor and a decryptor, each using a
  * given key and a given encryption algorithm. The encryptor turns a UTF-8 encoded
@@ -149,10 +153,12 @@ const makeCryptoFunctions = (key, algorithm) => [
  * Returns a promise for a name of the form "surname, name" obtained from the Uinames
  * API, for the given region and gender.
  */
-const randomName = ({ region, gender }) => request({
+
+// TODO
+const randomName = ({ region, gender }: { region: string, gender: string }): Promise<any> => request({ //Promise<string> ?
   method: 'GET',
   uri: 'https://uinames.com/api/',
   json: true,
   headers: { 'User-Agent': 'Homework Assignment from LMU' },
   qs: { region, gender, amount: 1 },
-}).then(p => `${p.surname}, ${p.name}`);
+}).then(p => `${p.surname}, ${p.name}`); //Does this need a type?
