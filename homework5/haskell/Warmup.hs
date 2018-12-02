@@ -1,5 +1,6 @@
 module Warmup
-    (change)
+    (change
+    , stripQuotes)
     where
 
 change amount =
@@ -7,12 +8,9 @@ change amount =
         Left "amount cannot be negative"
     else
         let
-            (quarters, afterQuarters) = amount divMod 25
-            (dimes, afterDimes) = afterQuarters divMod 10
-            (nickels, afterNickels) = afterDimes divMod 5
-            pennies = afterNickels
-            in
-        Right (quarters, dimes, nickels, pennies)
-        -- Right (0, 0, 0, 0)
+            (quarters, afterQuarters) = amount `divMod` 25
+            (dimes, afterDimes) = afterQuarters `divMod` 10
+            (nickels, pennies) = afterDimes `divMod` 5
+        in Right (quarters, dimes, nickels, pennies)
 
-stripQuotes s = filter(\c -> c /= '\'' && c /= '"')
+stripQuotes s = filter (\c -> c /= '\'' && c /= '"') s
