@@ -13,12 +13,10 @@ module Warmup
 import Data.Char
 
 change :: Int -> Either String (Int, Int, Int, Int)
-change amount =
-    if amount < 0 then
-        Left "amount cannot be negative"
-    else
-        let
-            (quarters, afterQuarters) = amount `divMod` 25
+change amount
+    | amount < 0 = Left "amount cannot be negative"
+    | otherwise = 
+        let (quarters, afterQuarters) = amount `divMod` 25
             (dimes, afterDimes) = afterQuarters `divMod` 10
             (nickels, pennies) = afterDimes `divMod` 5
         in Right (quarters, dimes, nickels, pennies)
@@ -28,22 +26,18 @@ stripQuotes s = filter (\c -> c /= '\'' && c /= '"') s
 
 firstUppercasedOverLengthFive :: [String] -> Maybe String
 firstUppercasedOverLengthFive [] = Nothing
-firstUppercasedOverLengthFive (s:strings) = 
-    if length s > 5 then
-        Just (map toUpper s)        
-    else
-        firstUppercasedOverLengthFive strings
+firstUppercasedOverLengthFive (s:strings) 
+    | length s > 5 = Just (map toUpper s)
+    | otherwise = firstUppercasedOverLengthFive strings
 
 powers :: Num a => a -> [a]
 powers num = map (num^) [0..]
 
 sumOfCubesOfOdds :: [Int] -> Int
 sumOfCubesOfOdds [] = 0
-sumOfCubesOfOdds (n:nums) = 
-    if n `mod` 2 /= 0 then
-        n * n * n + sumOfCubesOfOdds nums
-    else
-        sumOfCubesOfOdds nums
+sumOfCubesOfOdds (n:nums)
+    | n `mod` 2 /= 0 = n * n * n + sumOfCubesOfOdds nums
+    | otherwise = sumOfCubesOfOdds nums
 
 swapAdjacents :: [a] -> [a]
 swapAdjacents [] = []
