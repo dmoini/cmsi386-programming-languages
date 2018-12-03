@@ -46,5 +46,7 @@ sumOfCubesOfOdds (n:nums) =
     else
         sumOfCubesOfOdds nums
 
--- TODO
-swapAdjacents list = 0
+swapAdjacents :: [a] -> [a]
+swapAdjacents [] = []
+swapAdjacents (a:b:remaining) = b:a:(swapAdjacents remaining)
+swapAdjacents [a] = [a]
