@@ -4,9 +4,11 @@ module Warmup
     , firstUppercasedOverLengthFive
     , powers
     , sumOfCubesOfOdds
-    , swapAdjacents)
+    , swapAdjacents
+    , Shape(Box, Sphere)
+    , volume
+    , surfaceArea)
     where
-        -- ^^^ TODO: add to module data type for 3-D shapes
 
 import Data.Char
 
@@ -24,9 +26,6 @@ change amount =
 stripQuotes :: String -> String
 stripQuotes s = filter (\c -> c /= '\'' && c /= '"') s
 
--- A function that returns the uppercased version of the fist string 
--- in a list that has a length greater than 5, wrapped in a Maybe, 
--- since there might not be any strings greater than 5 in the list.
 firstUppercasedOverLengthFive :: [String] -> Maybe String
 firstUppercasedOverLengthFive [] = Nothing
 firstUppercasedOverLengthFive (s:strings) = 
@@ -50,3 +49,16 @@ swapAdjacents :: [a] -> [a]
 swapAdjacents [] = []
 swapAdjacents (a:b:remaining) = b:a:(swapAdjacents remaining)
 swapAdjacents [a] = [a]
+
+data Shape 
+    = Sphere Double 
+    | Box Double Double Double
+    deriving (Eq, Show)
+
+volume :: Shape -> Double
+volume (Sphere r) = (4 / 3) * pi * r**3
+volume (Box l w h) = l * w * h
+
+surfaceArea :: Shape -> Double
+surfaceArea (Sphere r) = 4 * pi * r**2
+surfaceArea (Box l w h) = 2 * (h * w) + 2 * (h * l) + 2 * (w * l)
