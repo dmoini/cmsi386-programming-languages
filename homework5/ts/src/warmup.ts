@@ -113,24 +113,60 @@ const interleave = (a: any[], ...b: any[]): any[] => {
  * the radius and height.
  */
 // TODO: update to actual class
-const cylinder = (specification) => {
-  let { radius = 1, height = 1 } = specification;
-  const capArea = () => Math.PI * radius * radius;
-  const surfaceArea = () => (2 * capArea()) + (2 * Math.PI * radius * height);
-  const stretch = (factor) => { height *= factor; };
-  const widen = (factor) => { radius *= factor; };
-  const volume = () => Math.PI * radius * radius * height;
-  const toString = () => `Cylinder with radius ${radius} and height ${height}`;
-  return Object.freeze({
-    volume,
-    surfaceArea,
-    get radius() { return radius; },
-    get height() { return height; },
-    stretch,
-    widen,
-    toString,
-  });
-};
+class Cylinder {
+  radius: number = 1
+  height: number = 1
+  
+  // TODO: constructor, possibly redo for input as object
+  constructor(specifications: any) {
+    this.radius = specifications['radius']
+    this.height = specifications['height']
+  }
+
+  capArea(): number {
+    return Math.PI * this.radius * this.radius
+  }
+
+  surfaceArea(): number {
+    return (2 * this.capArea()) + (2 * Math.PI * this.radius * this.height)
+  }
+
+  stretch(factor: number): void {
+    this.height *= factor
+  }
+
+  widen(factor: number): void {
+    this.radius *= factor
+  }
+
+  volume(): number {
+    return Math.PI * this.radius * this.radius * this.height
+  }
+
+  toString(): string {
+    return `Cylinder with radius ${this.radius} and height ${this.height}`
+  }
+  // TODO: return Object.freeze equivalent
+}
+
+// const cylinder = (specification) => {
+//   let { radius = 1, height = 1 } = specification;
+//   const capArea = () => Math.PI * radius * radius;
+//   const surfaceArea = () => (2 * capArea()) + (2 * Math.PI * radius * height);
+//   const stretch = (factor) => { height *= factor; };
+//   const widen = (factor) => { radius *= factor; };
+//   const volume = () => Math.PI * radius * radius * height;
+//   const toString = () => `Cylinder with radius ${radius} and height ${height}`;
+//   return Object.freeze({
+//     volume,
+//     surfaceArea,
+//     get radius() { return radius; },
+//     get height() { return height; },
+//     stretch,
+//     widen,
+//     toString,
+//   });
+// };
 
 // TODO
 /*
