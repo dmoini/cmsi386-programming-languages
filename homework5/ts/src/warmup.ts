@@ -118,9 +118,9 @@ class Cylinder {
   height: number = 1
   
   // TODO: constructor, possibly redo for input as object
-  constructor(specifications: any) {
-    this.radius = specifications['radius']
-    this.height = specifications['height']
+  constructor(radius: number = 1, height: number = 1) {
+    this.radius = radius
+    this.height = height
   }
 
   capArea(): number {
