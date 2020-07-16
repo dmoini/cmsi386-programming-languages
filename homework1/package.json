@@ -21,7 +21,7 @@
   "homepage": "https://github.com/dmoini/cmsi386-programming-languages#readme",
   "dependencies": {
     "ajv": "^6.10.1",
-    "lodash": "^4.17.14",
+    "lodash": "^4.17.19",
     "minimist": "^1.2.5",
     "request": "^2.88.0",
     "request-promise": "^4.2.4"
